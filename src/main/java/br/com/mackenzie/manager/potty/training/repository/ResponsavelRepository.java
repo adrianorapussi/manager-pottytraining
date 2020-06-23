@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResponsavelRepository extends JpaRepository<Responsavel, Integer> {
 
-    Responsavel findByUsuario(String usuario);
+    Responsavel findByPessoaNome(String nome);
 }
