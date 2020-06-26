@@ -32,9 +32,6 @@ public class Responsavel implements Serializable {
     private List<Crianca> criancas;
 
     @Column
-    private Integer idPerguntaResposta;
-
-    @Column
     private String estado;
 
     @Column

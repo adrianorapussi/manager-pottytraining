@@ -4,11 +4,10 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

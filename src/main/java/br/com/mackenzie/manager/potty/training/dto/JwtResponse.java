@@ -4,14 +4,13 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class JwtResponse implements Serializable {
 
-    private static final long serialVersionUID = -8091879091924046844L;
+    private static final long serialVersionUID = 1L;
 
     private String token;
 }

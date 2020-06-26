@@ -4,7 +4,6 @@ import br.com.mackenzie.manager.potty.training.domain.Crianca;
 import br.com.mackenzie.manager.potty.training.domain.Pessoa;
 import br.com.mackenzie.manager.potty.training.dto.CriancaDTO;
 import br.com.mackenzie.manager.potty.training.repository.CriancaRepository;
-import br.com.mackenzie.manager.potty.training.repository.ResponsavelRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class CriancaService {
 
     @Autowired
     private CriancaRepository criancaRepository;
-
-    @Autowired
-    private ResponsavelRepository responsavelRepository;
 
     @Autowired
     private ResponsavelService responsavelService;
