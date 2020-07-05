@@ -14,19 +14,19 @@ import java.util.List;
 @Service
 public class CriancaService {
 
-    private Log log = LogFactory.getLog(CriancaService.class);
+    private final Log log = LogFactory.getLog(CriancaService.class);
+
+    private final CriancaRepository criancaRepository;
+
+    private final ResponsavelService responsavelService;
 
     @Autowired
-    private CriancaRepository criancaRepository;
+    public CriancaService(CriancaRepository criancaRepository, ResponsavelService responsavelService) {
+        this.criancaRepository = criancaRepository;
+        this.responsavelService = responsavelService;
+    }
 
-    @Autowired
-    private ResponsavelService responsavelService;
-
-    public String save(CriancaDTO criancaDTO, String token) throws Exception {
-        var crianca = criancaRepository.findByPessoaNome(criancaDTO.getNome());
-        if (crianca != null) {
-            return "Crianca já cadastrada";
-        }
+    public String save(CriancaDTO criancaDTO, String token) {
 
         var responsavel = responsavelService.buscarResponsavelLogado(token);
 

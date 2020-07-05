@@ -19,12 +19,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Pergunta implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPergunta;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idQuestionario",nullable = false)
+    @JoinColumn(name = "idQuestionario", nullable = false)
     @JsonBackReference
     private Questionario questionario;
 
@@ -37,5 +39,8 @@ public class Pergunta implements Serializable {
 
     @Column
     private String dica;
+
+    @Column
+    private Boolean preenchida;
 
 }

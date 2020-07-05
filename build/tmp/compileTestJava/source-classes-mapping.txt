@@ -1,2 +1,0 @@
-br/com/mackenzie/manager/potty/training/ManagerPottyTrainingApplicationTests.java
- br.com.mackenzie.manager.potty.training.ManagerPottyTrainingApplicationTests

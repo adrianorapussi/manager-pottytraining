@@ -19,6 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Responsavel implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idResponsavel;
@@ -30,6 +32,10 @@ public class Responsavel implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavel")
     @JsonManagedReference
     private List<Crianca> criancas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavel")
+    @JsonManagedReference
+    private List<Questionario> questionarios;
 
     @Column
     private String estado;

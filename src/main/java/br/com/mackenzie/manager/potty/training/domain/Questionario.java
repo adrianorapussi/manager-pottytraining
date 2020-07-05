@@ -1,5 +1,6 @@
 package br.com.mackenzie.manager.potty.training.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Questionario implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idQuestionario;
@@ -26,8 +29,15 @@ public class Questionario implements Serializable {
     @JsonManagedReference
     private List<Pergunta> perguntas;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idResponsavel", nullable = false)
+    @JsonBackReference
+    private Responsavel responsavel;
+
     @Column
     private String descricao;
 
+    @Column
+    private Boolean preenchido;
 
 }

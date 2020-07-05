@@ -5,29 +5,28 @@ import br.com.mackenzie.manager.potty.training.dto.JwtRequest;
 import br.com.mackenzie.manager.potty.training.dto.JwtResponse;
 import br.com.mackenzie.manager.potty.training.dto.UserDTO;
 import br.com.mackenzie.manager.potty.training.service.JwtUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@RestController
-@CrossOrigin
+//@RestController
+//@CrossOrigin
 public class JwtAuthenticationController {
 
-    @Autowired
+    //@Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    //@Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
+    //@Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    //@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
@@ -35,7 +34,7 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    //@RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
         return ResponseEntity.ok(userDetailsService.save(user));
     }

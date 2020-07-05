@@ -9,16 +9,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="pessoa", schema = "potTrain")
+@Table(name = "pessoa", schema = "potTrain")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pessoa implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idPessoa ;
+    private Integer idPessoa;
 
     @Column
     private String nome;

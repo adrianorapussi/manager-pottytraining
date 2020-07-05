@@ -20,5 +20,6 @@ public class RespostaDTO implements Serializable {
 
     private Boolean correta;
 
+    private Boolean selecionada;
 
 }

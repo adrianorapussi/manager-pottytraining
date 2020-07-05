@@ -17,12 +17,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Resposta implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idResposta;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPergunta",nullable = false)
+    @JoinColumn(name = "idPergunta", nullable = false)
     @JsonBackReference
     private Pergunta pergunta;
 
@@ -31,5 +33,8 @@ public class Resposta implements Serializable {
 
     @Column
     private Boolean correta;
+
+    @Column
+    private Boolean selecionada;
 
 }

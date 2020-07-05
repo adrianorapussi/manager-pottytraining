@@ -6,7 +6,6 @@ import br.com.mackenzie.manager.potty.training.dto.ResponsavelDTO;
 import br.com.mackenzie.manager.potty.training.dto.UserDTO;
 import br.com.mackenzie.manager.potty.training.repository.ResponsavelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.SystemException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -26,6 +26,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
     private ResponsavelRepository responsavelRepository;
+
+    @Autowired
+    private QuestionarioService questionarioService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -37,7 +40,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
     }
 
-    public String save(UserDTO user) throws Exception {
+    public String save(UserDTO user) {
         var responsavel = responsavelRepository.findByPessoaNome(user.getUsername());
         if (responsavel == null) {
             responsavel = Responsavel.builder().
@@ -75,17 +78,20 @@ public class JwtUserDetailsService implements UserDetailsService {
                     trabalhaFora("SIM".equalsIgnoreCase(responsavelDTO.getTrabalhaFora())).
                     escolaridade(responsavelDTO.getEscolaridade()).
                     build();
+
+            var questionarios = questionarioService.buscarTodosQuestionarios();
+            if (questionarios != null) {
+                var questionariosUnicos = new HashSet<>(questionarios);
+                responsavel.setQuestionarios(new ArrayList<>(questionariosUnicos));
+            }
+
+
             responsavelRepository.save(responsavel);
             return "Usuario salvo com sucesso";
 
         } catch (Exception e) {
             throw new SystemException("Problema ao salvar usuário");
         }
-    }
-
-    public String getUserFromContext() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userDetails.getUsername();
     }
 
 }
