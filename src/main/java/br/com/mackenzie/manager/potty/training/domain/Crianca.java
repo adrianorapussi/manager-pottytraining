@@ -1,6 +1,7 @@
 package br.com.mackenzie.manager.potty.training.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "crianca", schema = "potTrain")
@@ -32,6 +35,10 @@ public class Crianca implements Serializable {
     @JsonBackReference
     private Responsavel responsavel;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crianca")
+    @JsonManagedReference
+    private List<Sessao> sessao;
+
     @Column
     private String dataNascimento;
 
@@ -40,4 +47,10 @@ public class Crianca implements Serializable {
 
     @Column
     private String condicao;
+
+    @Column
+    private Timestamp dataCriacao;
+
+    @Column
+    private Timestamp dataAlteracao;
 }

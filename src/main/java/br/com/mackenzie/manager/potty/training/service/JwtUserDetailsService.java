@@ -69,6 +69,8 @@ public class JwtUserDetailsService implements UserDetailsService {
                             nome(responsavelDTO.getNome()).
                             sexo(responsavelDTO.getSexo()).
                             idade(Integer.parseInt(responsavelDTO.getIdade())).
+                            dataCriacao(new Timestamp(System.currentTimeMillis())).
+                            dataAlteracao(new Timestamp(System.currentTimeMillis())).
                             build()).
                     senha(bcryptEncoder.encode(responsavelDTO.getSenha())).
                     dataCriacao(new Timestamp(System.currentTimeMillis())).
@@ -84,7 +86,6 @@ public class JwtUserDetailsService implements UserDetailsService {
                 var questionariosUnicos = new HashSet<>(questionarios);
                 responsavel.setQuestionarios(new ArrayList<>(questionariosUnicos));
             }
-
 
             responsavelRepository.save(responsavel);
             return "Usuario salvo com sucesso";

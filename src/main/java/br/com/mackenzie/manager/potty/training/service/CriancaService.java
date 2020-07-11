@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -40,6 +41,8 @@ public class CriancaService {
                 dataNascimento(criancaDTO.getDataNascimento()).
                 responsavel(responsavel).
                 utilizaFralda(criancaDTO.getUtilizaFralda()).
+                dataCriacao(new Timestamp(System.currentTimeMillis())).
+                dataAlteracao(new Timestamp(System.currentTimeMillis())).
                 build();
 
         criancaRepository.save(criancaNova);

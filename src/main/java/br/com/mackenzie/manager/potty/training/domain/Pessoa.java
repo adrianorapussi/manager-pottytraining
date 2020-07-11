@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "pessoa", schema = "potTrain")
@@ -34,5 +35,9 @@ public class Pessoa implements Serializable {
     @Column
     private String sexo;
 
+    @Column
+    private Timestamp dataCriacao;
 
+    @Column
+    private Timestamp dataAlteracao;
 }
